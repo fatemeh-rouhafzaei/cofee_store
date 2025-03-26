@@ -99,7 +99,7 @@ class CoffeeStoreApp(Product , customer):
     
     def add_customer(self):
         name = self.name.get()
-        emai = self.emai.get()
+        email = self.email.get()
         phone = self.phone.get()
         self.insert_customer(name , email , phone)
         self.refresh_customer_list()
