@@ -2,7 +2,8 @@ import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from packages.lib.product.product import Product
-class CoffeeStoreApp(Product , customer):
+from packages.lib.customer.customer import Customer
+class CoffeeStoreApp(Product , Customer):
     def __init__(self , master , file_name_1 , file_name_2):
         super().__init__(file_name_1 , file_name_2)
         self.master = master
