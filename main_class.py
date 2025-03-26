@@ -4,8 +4,11 @@ from ttkbootstrap.constants import *
 from packages.lib.product.product import Product
 from packages.lib.customer.customer import Customer
 class CoffeeStoreApp(Product , Customer):
-    def __init__(self , master , file_name_1 , file_name_2):
-        super().__init__(file_name_1 , file_name_2)
+    def __init__(self , master , products_app , customers_app):
+        # Product.__init__(self, products_app)
+        # Customer.__init__(self, customers_path)
+        self.products_app = products_app
+        self.customers_app = customers_app
         self.master = master
         self.master.title("Coffe Store")
         self.master.geometry("400x400+1990+200")
@@ -31,10 +34,11 @@ class CoffeeStoreApp(Product , Customer):
         self.product_list_box.delete(0, tk.END)
 
         # فراخوانی تمامی محصولات موجود در پایگاه داده
-        product_list = self.read_json()
+        path = f"json/{self.products_app}.json"
+        product_list = self.read_json(path)
         for product in product_list:
             # درج تک تک محصولات درون لیست باکس
-            self.product_list_box.insert(tk.END , f"{product['name']}   {product['price']}")
+            self.product_list_box.insert(tk.END , f"{product['name_fa']}   {product['price']}")
     
     def add_product(self):
         name = self.name.get()
@@ -43,7 +47,8 @@ class CoffeeStoreApp(Product , Customer):
         unit_en = self.unit_en.get()
         price = self.price.get()
         stock = self.stock.get()
-        self.insert_product(name, email, phone, unit_en, price , stock)
+        path = f"json/{self.products_app}.json"
+        self.insert_product(path , name, email, phone, unit_en, price , stock)
         self.refresh_product_list()
     
     def add_product_window(self):
@@ -93,7 +98,8 @@ class CoffeeStoreApp(Product , Customer):
         self.customer_list_box.delete(0, tk.END)
 
         # فراخوانی تمامی محصولات موجود در پایگاه داده
-        customer_list = self.read_json()
+        path = f"json/{self.customers_app}.json"
+        customer_list = self.read_json(path)
         for customer in customer_list:
             # درج تک تک محصولات درون لیست باکس
             self.customer_list_box.insert(tk.END , f"{customer['name']}   {customer['email']}")
@@ -123,12 +129,12 @@ class CoffeeStoreApp(Product , Customer):
         submit_add = ttk.Button(window, bootstyle="danger" , text="save", command=self.add_customer)
         submit_add.grid(columnspan=2, row=4, sticky=ttk.EW, padx=10, pady=5)
 
-def main(file_name):
+def main(products_app , customers_path):
     # create master window
     master = ttk.Window(themename="darkly")
-    app = CoffeeStoreApp(master , file_name_1 , file_name_2)
+    app = CoffeeStoreApp(master , products_app , customers_path)
     master.mainloop()
 
-file_name_1 = "json/products.json"
-file_name_2 = "json/customers.json"
-main(file_name_1)
+products_app = "products"
+customers_path = "customers"
+main(products_app , customers_path)
