@@ -9,10 +9,10 @@ class Product(RWFiles):
             product_names_list.append(product['name_en'])
         return product_names_list
 
-    def insert_product(self, name_fa , name_en , unit_fa, unit_en, price, stock):
+    def insert_product(self,path, name_fa , name_en , unit_fa, unit_en, price, stock):
         # دریافت محصولات فعلی
         # file_name = "json/products.json"
-        products_list = self.read_json()
+        products_list = self.read_json(path)
         # دریافت آخرین محصول موجود
         last_product = products_list[-1]
         # ایجاد آی دی برای محصول جدید بر اساس آی دی آخرین محصول
@@ -31,10 +31,10 @@ class Product(RWFiles):
         products_list.append(new_product)
 
         # جایگزین لیست محصولات جدید با لیست محصولات قبلی در فایل جیسون
-        self.write_json(products_list)
+        self.write_json(products_list , path)
 
-    def remove_product(self, product_id):
-        products_list = self.read_json()
+    def remove_product(self,path, product_id):
+        products_list = self.read_json(path)
         products_len = len(products_list)
         for product in products_list:
             for key , value in product.items():
@@ -44,21 +44,21 @@ class Product(RWFiles):
                 else:
                     return "not_found"
         if len(products_list) == products_len - 1:
-            self.write_json(products_list)
+            self.write_json(products_list ,path)
             return "success"
         else:
             return "failed"
 
-    def get_product_by_id(self, product_id):
+    def get_product_by_id(self,path, product_id):
         # دریافت محصولات فعلی
-        products_list = self.read_json()
+        products_list = self.read_json(path)
         for product in products_list:
             for key , value in product.items():
                 if ((key == "id") & (value == product_id)):
                     return product
 
-    def edit_product(self, product_id ,  product_properties):
-        products_list = self.read_json()
+    def edit_product(self,path, product_id ,  product_properties):
+        products_list = self.read_json(path)
         for product in products_list:
             for key , value in product.items():
                 if ((key == "id") & (value == product_id)):
@@ -69,4 +69,4 @@ class Product(RWFiles):
                     product['price']  = product_properties['price']  
                     product['stock']  = product_properties['stock']
 
-        self.write_json(products_list)
+        self.write_json(products_list ,path)

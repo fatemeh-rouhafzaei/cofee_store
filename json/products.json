@@ -1,86 +1,5 @@
 [
     {
-        "id": 1,
-        "name_fa": "لیبریکا",
-        "name_en": "new name of coffee",
-        "unit_fa": "گرم",
-        "unit_en": "gr",
-        "price": 1200,
-        "stock": 10000
-    },
-    {
-        "id": 3,
-        "name_fa": "چای جهان",
-        "name_en": "world tea",
-        "unit_fa": "گرم",
-        "unit_en": "gr",
-        "price": 12,
-        "stock": 10000
-    },
-    {
-        "id": 4,
-        "name_fa": "poll",
-        "name_en": "eeeeooo",
-        "unit_fa": "tttwww",
-        "unit_en": "gr",
-        "price": 19900,
-        "stock": 10000
-    },
-    {
-        "id": 5,
-        "name_fa": "poll",
-        "name_en": "eeeeooo",
-        "unit_fa": "tttwww",
-        "unit_en": "gr",
-        "price": 19900,
-        "stock": 10000
-    },
-    {
-        "id": 6,
-        "name_fa": "poll",
-        "name_en": "eeeeooo",
-        "unit_fa": "tttwww",
-        "unit_en": "gr",
-        "price": 19900,
-        "stock": 10000
-    },
-    {
-        "id": 7,
-        "name_fa": "dfgdfg",
-        "name_en": "eeeeooo",
-        "unit_fa": "tttwww",
-        "unit_en": "gr",
-        "price": 19900,
-        "stock": 10000
-    },
-    {
-        "id": 8,
-        "name_fa": "dfgdfg",
-        "name_en": "eeeeooo",
-        "unit_fa": "tttwww",
-        "unit_en": "gr",
-        "price": 19900,
-        "stock": 10000
-    },
-    {
-        "id": 9,
-        "name_fa": "dfgdfg",
-        "name_en": "eeeeooo",
-        "unit_fa": "tttwww",
-        "unit_en": "gr",
-        "price": 19900,
-        "stock": 10000
-    },
-    {
-        "id": 10,
-        "name_fa": "persian tea",
-        "name_en": "eeeeooo",
-        "unit_fa": "tttwww",
-        "unit_en": "gr",
-        "price": 19900,
-        "stock": 10000
-    },
-    {
         "id": 11,
         "name_fa": "چاي صوفيا",
         "name_en": "Sofia Tea",
@@ -124,5 +43,14 @@
         "unit_en": "fg",
         "price": "657567",
         "stock": "56757"
+    },
+    {
+        "id": 16,
+        "name_fa": "sdfsds",
+        "name_en": "sdf",
+        "unit_fa": "",
+        "unit_en": "sdf",
+        "price": "345",
+        "stock": "345"
     }
 ]

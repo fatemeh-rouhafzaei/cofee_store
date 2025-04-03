@@ -1,4 +1,5 @@
-class customer(RWFiles):
+from packages.lib.rw_files.rw_files import RWFiles
+class Customer(RWFiles):
     def __init__(self, file_name):
         super().__init__(file_name)
 
