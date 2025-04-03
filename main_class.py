@@ -11,7 +11,7 @@ class CoffeeStoreApp(Product , Customer):
         self.customers_app = customers_app
         self.master = master
         self.master.title("Coffe Store")
-        self.master.geometry("400x400+1990+200")
+        self.master.geometry("400x400")
         self.create_widgets_product()
         self.create_widgets_customer()
 
@@ -96,7 +96,7 @@ class CoffeeStoreApp(Product , Customer):
     def refresh_customer_list(self):
         # حذف تمامی موارد داخل لیست باکس
         self.customer_list_box.delete(0, tk.END)
-
+        
         # فراخوانی تمامی محصولات موجود در پایگاه داده
         path = f"json/{self.customers_app}.json"
         customer_list = self.read_json(path)
@@ -108,7 +108,8 @@ class CoffeeStoreApp(Product , Customer):
         name = self.name.get()
         email = self.email.get()
         phone = self.phone.get()
-        self.insert_customer(name , email , phone)
+        path = f"json/{self.customer_app}.json"
+        self.insert_customer(path , name, email, phone)
         self.refresh_customer_list()
     
     def add_customer_window(self):
