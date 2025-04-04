@@ -9,10 +9,10 @@ class Customer(RWFiles):
             customer_names_list.append(customer['email'])
         return customer_names_list
 
-    def insert_customer(self, name , email , phone):
+    def insert_customer(self,path, name , email , phone):
         # دریافت محصولات فعلی
         # file_name = "json/customers.json"
-        customers_list = self.read_json()
+        customers_list = self.read_json(path)
         # دریافت آخرین محصول موجود
         last_customer = customers_list[-1]
         # ایجاد آی دی برای محصول جدید بر اساس آی دی آخرین محصول
@@ -28,10 +28,10 @@ class Customer(RWFiles):
         customers_list.append(new_customer)
 
         # جایگزین لیست محصولات جدید با لیست محصولات قبلی در فایل جیسون
-        self.write_json(customers_list)
+        self.write_json( customers_list,path)
 
-    def remove_customer(self, customer_id):
-        customers_list = self.read_json()
+    def remove_customer(self,path ,customer_id):
+        customers_list = self.read_json(path)
         customers_len = len(customers_list)
         for customer in customers_list:
             for key , value in customer.items():

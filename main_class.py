@@ -11,7 +11,7 @@ class CoffeeStoreApp(Product , Customer):
         self.customers_app = customers_app
         self.master = master
         self.master.title("Coffe Store")
-        self.master.geometry("400x400")
+        self.master.geometry("800x800")
         self.create_widgets_product()
         self.create_widgets_customer()
 
@@ -26,7 +26,7 @@ class CoffeeStoreApp(Product , Customer):
 
         self.customer_list_box = tk.Listbox(self.master)
         self.customer_list_box.pack(fill=tk.BOTH , expand = True , padx=10 , pady=10)
-        add_customer_btn = ttk.Button(self.master , text="add customer" , bootstyle = "success" , command=self.add_product_window)
+        add_customer_btn = ttk.Button(self.master , text="add customer" , bootstyle = "success" , command=self.add_customer_window)
         add_customer_btn.pack(side=LEFT , padx= 10 , pady= 10)
 
     def refresh_product_list(self):
@@ -53,7 +53,7 @@ class CoffeeStoreApp(Product , Customer):
     
     def add_product_window(self):
         window = ttk.Window("add product","solar", resizable=(False, False))
-        window.geometry("300x300+2700+200")
+        window.geometry("300x300")
         label_name = ttk.Label(window, text="Fa Name :")
         label_name.grid(column=0, row=1, sticky=ttk.W, padx=10, pady=5)
         self.name =ttk.Entry(window,bootstyle="success", text="Example :لیبریکا ")
@@ -108,18 +108,18 @@ class CoffeeStoreApp(Product , Customer):
         name = self.name.get()
         email = self.email.get()
         phone = self.phone.get()
-        path = f"json/{self.customer_app}.json"
+        path = f"json/{self.customers_app}.json"
         self.insert_customer(path , name, email, phone)
         self.refresh_customer_list()
     
     def add_customer_window(self):
         window = ttk.Window("add customer","solar", resizable=(False, False))
-        window.geometry("300x300+2700+200")
-        label_name = ttk.Label(window, text="Fa Name :")
+        window.geometry("300x300")
+        label_name = ttk.Label(window, text="Name :")
         label_name.grid(column=0, row=1, sticky=ttk.W, padx=10, pady=5)
         self.name =ttk.Entry(window,bootstyle="success", text="Example :لیبریکا ")
         self.name.grid(column=1, row=1, sticky=ttk.W, padx=10, pady=5)
-        label_email = ttk.Label(window, text="En Name : ")
+        label_email = ttk.Label(window, text="email : ")
         label_email.grid(column=0, row=2, sticky=ttk.W, padx=10, pady=5)
         self.email = ttk.Entry(window, bootstyle="success", text="Example :new name of coffee " )
         self.email.grid(column=1, row=2, sticky=ttk.W, padx=10, pady=5)
