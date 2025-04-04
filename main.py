@@ -1,7 +1,7 @@
 import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
-from packages.lib.store_lib import *
+from packages.mylib.store_lib import *
 file_name = "json/products.json"
 
 class CoffeeStoreApp:

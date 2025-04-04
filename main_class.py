@@ -1,8 +1,8 @@
 import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
-from packages.lib.product.product import Product
-from packages.lib.customer.customer import Customer
+from packages.mylib.product.product import Product
+from packages.mylib.customer.customer import Customer
 class CoffeeStoreApp(Product , Customer):
     def __init__(self , master , products_app , customers_app):
         # Product.__init__(self, products_app)
@@ -12,33 +12,40 @@ class CoffeeStoreApp(Product , Customer):
         self.master = master
         self.master.title("Coffe Store")
         self.master.geometry("800x800")
-        self.create_widgets_product()
-        self.create_widgets_customer()
 
-        
+        self.notebook = ttk.Notebook(self.master)
+        self.notebook.pack(pady=10, fill="both" , expand=True)
 
-    def create_widgets_product(self):
-        self.product_list_box = tk.Listbox(self.master)
-        self.product_list_box.pack(fill=tk.BOTH , expand = True , padx=10 , pady=10)
+        self.product_frame = ttk.Frame(self.notebook)
+        self.notebook.add(self.product_frame , text="products")
+
+        self.customer_frame = ttk.Frame(self.notebook)
+        self.notebook.add(self.customer_frame , text="customers")
+
         add_product_btn = ttk.Button(self.master , text="add product" , bootstyle = "success" , command=self.add_product_window)
         add_product_btn.pack(side=LEFT , padx= 10 , pady= 10)
-        self.refresh_product_list()
 
-        self.customer_list_box = tk.Listbox(self.master)
-        self.customer_list_box.pack(fill=tk.BOTH , expand = True , padx=10 , pady=10)
         add_customer_btn = ttk.Button(self.master , text="add customer" , bootstyle = "success" , command=self.add_customer_window)
         add_customer_btn.pack(side=LEFT , padx= 10 , pady= 10)
 
+        self.refresh_product_list()
+        self.refresh_customer_list()
+
+
     def refresh_product_list(self):
         # حذف تمامی موارد داخل لیست باکس
-        self.product_list_box.delete(0, tk.END)
+        for product_child in self.product_frame.winfo_children():
+            product_child.destroy()
 
         # فراخوانی تمامی محصولات موجود در پایگاه داده
         path = f"json/{self.products_app}.json"
         product_list = self.read_json(path)
         for product in product_list:
-            # درج تک تک محصولات درون لیست باکس
-            self.product_list_box.insert(tk.END , f"{product['name_fa']}   {product['price']}")
+            frame = ttk.Frame(self.product_frame)
+            frame.pack(fill="x" , padx=10 , pady=5)
+            ttk.Label(frame , text=f"{product['name_fa']}   {product['price']}").pack(side="left")
+            
+
     
     def add_product(self):
         name = self.name.get()
@@ -81,28 +88,20 @@ class CoffeeStoreApp(Product , Customer):
         submit_add = ttk.Button(window, bootstyle="danger" , text="save", command=self.add_product)
         submit_add.grid(columnspan=2, row=7, sticky=ttk.EW, padx=10, pady=5)
 #---------------------------------------------------------------------------        
-    def create_widgets_customer(self):
-        self.customer_list_box = tk.Listbox(self.master)
-        self.customer_list_box.pack(fill=tk.BOTH , expand = True , padx=10 , pady=10)
-        add_customer_btn = ttk.Button(self.master , text="add customer" , bootstyle = "success" , command=self.add_customer_window)
-        add_customer_btn.pack(side=LEFT , padx= 10 , pady= 10)
-        self.refresh_customer_list()
-
-        self.customer_list_box = tk.Listbox(self.master)
-        self.customer_list_box.pack(fill=tk.BOTH , expand = True , padx=10 , pady=10)
-        add_customer_btn = ttk.Button(self.master , text="add customer" , bootstyle = "success" , command=self.add_customer_window)
-        add_customer_btn.pack(side=LEFT , padx= 10 , pady= 10)
 
     def refresh_customer_list(self):
-        # حذف تمامی موارد داخل لیست باکس
-        self.customer_list_box.delete(0, tk.END)
-        
-        # فراخوانی تمامی محصولات موجود در پایگاه داده
+        # حذف تمامی موارد داخل فریم مشتری
+        for customer_child in self.customer_frame.winfo_children():
+            customer_child.destroy()        
+        # فراخوانی تمامی مشتریان موجود در پایگاه داده
         path = f"json/{self.customers_app}.json"
         customer_list = self.read_json(path)
         for customer in customer_list:
-            # درج تک تک محصولات درون لیست باکس
-            self.customer_list_box.insert(tk.END , f"{customer['name']}   {customer['email']}")
+            # درج تک تک محصولات درون فریم مشتری
+            frame = ttk.Frame(self.customer_frame)
+            frame.pack(fill="x" , padx=10 , pady=5)
+            ttk.Label(frame , text=f"{customer['name']}   {customer['email']}").pack(side="left")
+
     
     def add_customer(self):
         name = self.name.get()
