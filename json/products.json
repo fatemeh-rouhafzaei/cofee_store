@@ -6,7 +6,7 @@
         "unit_fa": "",
         "unit_en": "gr",
         "price": "15000",
-        "stock": "600"
+        "stock": "15"
     },
     {
         "id": 12,
@@ -69,7 +69,7 @@
         "unit_fa": "",
         "unit_en": "sds",
         "price": "435435",
-        "stock": "345345"
+        "stock": "20"
     },
     {
         "id": 19,
@@ -78,7 +78,7 @@
         "unit_fa": "",
         "unit_en": "xcv",
         "price": "43543",
-        "stock": "345435"
+        "stock": "10"
     },
     {
         "id": 20,
@@ -87,7 +87,7 @@
         "unit_fa": "",
         "unit_en": "sdf",
         "price": "4534543553",
-        "stock": "34535"
+        "stock": "5"
     },
     {
         "id": 21,
@@ -96,7 +96,7 @@
         "unit_fa": "",
         "unit_en": "opop",
         "price": "45645",
-        "stock": "456456"
+        "stock": "60"
     },
     {
         "id": 22,
@@ -105,6 +105,6 @@
         "unit_fa": "",
         "unit_en": "cvcv",
         "price": "565",
-        "stock": "5656"
+        "stock": "40"
     }
 ]
