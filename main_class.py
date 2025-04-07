@@ -33,19 +33,39 @@ class CoffeeStoreApp(Product , Customer):
 
 
     def refresh_product_list(self):
-        # حذف تمامی موارد داخل لیست باکس
+        # حذف تمامی موارد موجود در فریم محصولات
         for product_child in self.product_frame.winfo_children():
             product_child.destroy()
 
-        # فراخوانی تمامی محصولات موجود در پایگاه داده
+        # تعیین مسیر فایل JSON حاوی اطلاعات محصولات
         path = f"json/{self.products_app}.json"
-        product_list = self.read_json(path)
-        for product in product_list:
-            frame = ttk.Frame(self.product_frame)
-            frame.pack(fill="x" , padx=10 , pady=5)
-            ttk.Label(frame , text=f"{product['name_fa']}   {product['price']}").pack(side="left")
-            
 
+        # خواندن لیست محصولات از فایل JSON
+        product_list = self.read_json(path)
+
+        # ایجاد رابط کاربری برای هر محصول در لیست محصولات
+        for product in product_list:
+            # ایجاد یک فریم جدید برای محصول
+            frame = ttk.Frame(self.product_frame)
+
+            # افزودن فریم به فریم اصلی با فاصله‌گذاری مناسب
+            frame.pack(fill="x", padx=10, pady=5)
+
+            # افزودن لیبل با نام فارسی محصول و قیمت آن
+            ttk.Label(frame, text=f"{product['name_fa']}   {product['price']}").pack(side="left")
+
+            # ایجاد متغیر عددی برای مقدار اولیه تعداد محصول
+            qty = ttk.IntVar(value=1)
+
+            # ایجاد Spinbox برای انتخاب تعداد محصول، از ۱ تا موجودی انبار
+            ttk.Spinbox(frame, from_=1, to=product['stock'], textvariable=qty, width=5).pack(side="right")
+
+            # افزودن دکمه "اضافه کردن به سبد خرید" برای هر محصول
+            ttk.Button(frame, text="add to cart", command=lambda p=product, q=qty: self.add_to_cart(p, q.get())).pack(side="right")
+
+            
+    def add_to_cart(self , p , q):
+        print("added" , p , q)
     
     def add_product(self):
         name = self.name.get()
