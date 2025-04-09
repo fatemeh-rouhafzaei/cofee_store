@@ -6,20 +6,20 @@
         "unit_fa": "",
         "unit_en": "gr",
         "price": "15000",
-        "stock": "15"
+        "stock": 11
     },
     {
         "id": 12,
-        "name_fa": "sdf",
-        "name_en": "sdf",
-        "unit_fa": "",
-        "unit_en": "sdf",
+        "name_fa": " بستنی بجنوردی",
+        "name_en": "icecream",
+        "unit_fa": "کیلو",
+        "unit_en": "kilo",
         "price": "345",
         "stock": "345"
     },
     {
         "id": 13,
-        "name_fa": "fddg",
+        "name_fa": "یب یب",
         "name_en": "dfgdf",
         "unit_fa": "",
         "unit_en": "dfg",
@@ -28,7 +28,7 @@
     },
     {
         "id": 14,
-        "name_fa": "fdgfd",
+        "name_fa": " سیبسیب ",
         "name_en": "dfgdfdfg",
         "unit_fa": "",
         "unit_en": "fg",
@@ -37,7 +37,7 @@
     },
     {
         "id": 15,
-        "name_fa": "cb",
+        "name_fa": "سیب سیب",
         "name_en": "nhgj gf",
         "unit_fa": "",
         "unit_en": "fg",
@@ -46,7 +46,7 @@
     },
     {
         "id": 16,
-        "name_fa": "sdfsds",
+        "name_fa": "داس",
         "name_en": "sdf",
         "unit_fa": "",
         "unit_en": "sdf",
@@ -64,7 +64,7 @@
     },
     {
         "id": 18,
-        "name_fa": "dsds",
+        "name_fa": "فیل",
         "name_en": "sdsd",
         "unit_fa": "",
         "unit_en": "sds",
@@ -73,7 +73,7 @@
     },
     {
         "id": 19,
-        "name_fa": "xcv",
+        "name_fa": "منوتو",
         "name_en": "xcv",
         "unit_fa": "",
         "unit_en": "xcv",
@@ -82,29 +82,11 @@
     },
     {
         "id": 20,
-        "name_fa": "sdfdsf",
+        "name_fa": "شیر",
         "name_en": "sdfsdf",
         "unit_fa": "",
         "unit_en": "sdf",
         "price": "4534543553",
         "stock": "5"
-    },
-    {
-        "id": 21,
-        "name_fa": "popopopop",
-        "name_en": "opop",
-        "unit_fa": "",
-        "unit_en": "opop",
-        "price": "45645",
-        "stock": "60"
-    },
-    {
-        "id": 22,
-        "name_fa": "vcvvcv",
-        "name_en": "cvcvccvc",
-        "unit_fa": "",
-        "unit_en": "cvcv",
-        "price": "565",
-        "stock": "40"
     }
 ]

@@ -1,8 +1,10 @@
 import tkinter as tk
 import ttkbootstrap as ttk
+import datetime
 from ttkbootstrap.constants import *
 from packages.mylib.product.product import Product
 from packages.mylib.customer.customer import Customer
+from packages.mylib.store_lib import insert_order
 class CoffeeStoreApp(Product , Customer):
     def __init__(self , master , products_app , customers_app):
         # Product.__init__(self, products_app)
@@ -13,6 +15,7 @@ class CoffeeStoreApp(Product , Customer):
         self.master.title("Coffe Store")
         self.master.geometry("800x800")
 
+        # create tabs: notebook
         self.notebook = ttk.Notebook(self.master)
         self.notebook.pack(pady=10, fill="both" , expand=True)
 
@@ -22,6 +25,8 @@ class CoffeeStoreApp(Product , Customer):
         self.customer_frame = ttk.Frame(self.notebook)
         self.notebook.add(self.customer_frame , text="customers")
 
+
+        
         add_product_btn = ttk.Button(self.master , text="add product" , bootstyle = "success" , command=self.add_product_window)
         add_product_btn.pack(side=LEFT , padx= 10 , pady= 10)
 
@@ -52,7 +57,7 @@ class CoffeeStoreApp(Product , Customer):
             frame.pack(fill="x", padx=10, pady=5)
 
             # افزودن لیبل با نام فارسی محصول و قیمت آن
-            ttk.Label(frame, text=f"{product['name_fa']}   {product['price']}").pack(side="left")
+            ttk.Label(frame, text=f"نام محصول:{product['name_fa']}   قیمت:{product['price']} موجودی:{product['stock']}").pack(side="left")
 
             # ایجاد متغیر عددی برای مقدار اولیه تعداد محصول
             qty = ttk.IntVar(value=1)
@@ -64,9 +69,24 @@ class CoffeeStoreApp(Product , Customer):
             ttk.Button(frame, text="add to cart", command=lambda p=product, q=qty: self.add_to_cart(p, q.get())).pack(side="right")
 
             
-    def add_to_cart(self , p , q):
-        print("added" , p , q)
-    
+    def add_to_cart(self , product , quantity):
+        # محاسبه قیمت کل سفارش
+        total_price = float(product['price']) * quantity
+
+        path_order = f"json/orders.json"
+        insert_order(path_order , 1 , product['id'], quantity, total_price, str(datetime.datetime.now()))
+        path_product = f"json/{self.products_app}.json"
+        # ساخت دیکشنری مشخصات محصول برای کسر شدن تعداد فروخته شده از موجودی
+        product_properties = {
+            "name_fa": product['name_fa'],
+            "name_en": product['name_en'],
+            "unit_fa": product['unit_fa'],
+            "unit_en": product['unit_en'],
+            "price": float(product['price']),
+            "stock": int(product['stock']) - quantity
+        }
+        self.edit_product(path_product , product['id'] , product_properties)
+
     def add_product(self):
         name = self.name.get()
         email = self.email.get()
