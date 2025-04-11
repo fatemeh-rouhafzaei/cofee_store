@@ -2,9 +2,9 @@ import tkinter as tk
 import ttkbootstrap as ttk
 import datetime
 from ttkbootstrap.constants import *
-from packages.mylib.product.product import Product
-from packages.mylib.customer.customer import Customer
-from packages.mylib.store_lib import insert_order
+from apps.product.product import Product
+from apps.customer.customer import Customer
+from apps.store_lib import insert_order
 class CoffeeStoreApp(Product , Customer):
     def __init__(self , master , products_app , customers_app):
         # Product.__init__(self, products_app)
