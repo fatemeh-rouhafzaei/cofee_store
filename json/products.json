@@ -5,8 +5,8 @@
         "name_en": "Sofia Tea",
         "unit_fa": "",
         "unit_en": "gr",
-        "price": "15000",
-        "stock": 11
+        "price": 15000.0,
+        "stock": 6
     },
     {
         "id": 12,

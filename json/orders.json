@@ -54,5 +54,21 @@
         "quantity": 4,
         "total_price": 60000.0,
         "order_date": "2025-04-09 19:43:57.590297"
+    },
+    {
+        "id": 8,
+        "customer_id": 3,
+        "product_id": 11,
+        "quantity": 2,
+        "total_price": 30000.0,
+        "order_date": "2025-04-11 11:19:59.755318"
+    },
+    {
+        "id": 9,
+        "customer_id": 5,
+        "product_id": 11,
+        "quantity": 1,
+        "total_price": 15000.0,
+        "order_date": "2025-04-11 11:24:01.042178"
     }
 ]

@@ -5,6 +5,7 @@ from ttkbootstrap.constants import *
 from apps.product.product import Product
 from apps.customer.customer import Customer
 from apps.store_lib import insert_order
+from ttkbootstrap.dialogs import Messagebox
 class CoffeeStoreApp(Product , Customer):
     def __init__(self , master , products_app , customers_app):
         # Product.__init__(self, products_app)
@@ -66,26 +67,8 @@ class CoffeeStoreApp(Product , Customer):
             ttk.Spinbox(frame, from_=1, to=product['stock'], textvariable=qty, width=5).pack(side="right")
 
             # افزودن دکمه "اضافه کردن به سبد خرید" برای هر محصول
-            ttk.Button(frame, text="add to cart", command=lambda p=product, q=qty: self.add_to_cart(p, q.get())).pack(side="right")
+            ttk.Button(frame, text="add order", command=lambda p=product, q=qty: self.add_order_window(p, q.get())).pack(side="right")
 
-            
-    def add_to_cart(self , product , quantity):
-        # محاسبه قیمت کل سفارش
-        total_price = float(product['price']) * quantity
-
-        path_order = f"json/orders.json"
-        insert_order(path_order , 1 , product['id'], quantity, total_price, str(datetime.datetime.now()))
-        path_product = f"json/{self.products_app}.json"
-        # ساخت دیکشنری مشخصات محصول برای کسر شدن تعداد فروخته شده از موجودی
-        product_properties = {
-            "name_fa": product['name_fa'],
-            "name_en": product['name_en'],
-            "unit_fa": product['unit_fa'],
-            "unit_en": product['unit_en'],
-            "price": float(product['price']),
-            "stock": int(product['stock']) - quantity
-        }
-        self.edit_product(path_product , product['id'] , product_properties)
 
     def add_product(self):
         name = self.name.get()
@@ -141,7 +124,6 @@ class CoffeeStoreApp(Product , Customer):
             frame = ttk.Frame(self.customer_frame)
             frame.pack(fill="x" , padx=10 , pady=5)
             ttk.Label(frame , text=f"{customer['name']}   {customer['email']}").pack(side="left")
-
     
     def add_customer(self):
         name = self.name.get()
@@ -168,6 +150,50 @@ class CoffeeStoreApp(Product , Customer):
         self.phone.grid(column=1, row=3, sticky=ttk.W, padx=10, pady=5)
         submit_add = ttk.Button(window, bootstyle="danger" , text="save", command=self.add_customer)
         submit_add.grid(columnspan=2, row=4, sticky=ttk.EW, padx=10, pady=5)
+#----------------------------------------------------------------------------
+
+    def add_order_window(self, product , quantity):
+        order_window = ttk.Window("add order" , "solar" , resizable=(False, False))
+        order_window.geometry("300x300")
+
+        path = f"json/{self.customers_app}.json"
+        customer_list = self.read_json(path)
+        # customers_info = {'name': "hamzeh"}
+        
+
+        customers_info = {customer['id']: f"{customer['name']} {customer['id']}" for customer in customer_list}
+        ttk.Label(order_window , text="customers:").pack(pady=5)
+        self.customer_combo = ttk.Combobox(order_window , values=list(customers_info.values()))
+        self.customer_combo.pack(pady=5)
+        
+        submit_add_order = ttk.Button(order_window , bootstyle = "info" , text="save",
+                                      command=lambda selected_product = product , seleted_quantity = quantity: self.add_order(selected_product , seleted_quantity))
+        submit_add_order.pack(pady=5)
+
+    def add_order(self, selected_product , seleted_quantity):
+        selected_customer = self.customer_combo.get()
+        customer_properties = selected_customer.split()
+        customer_id = int(customer_properties[-1])
+        
+        total_price = float(selected_product['price']) * seleted_quantity
+
+        path_order = f"json/orders.json"
+        insert_order(path_order , customer_id , selected_product['id'], seleted_quantity, total_price, str(datetime.datetime.now()))
+        path_product = f"json/{self.products_app}.json"
+        # ساخت دیکشنری مشخصات محصول برای کسر شدن تعداد فروخته شده از موجودی
+        product_properties = {
+            "name_fa": selected_product['name_fa'],
+            "name_en": selected_product['name_en'],
+            "unit_fa": selected_product['unit_fa'],
+            "unit_en": selected_product['unit_en'],
+            "price": float(selected_product['price']),
+            "stock": int(selected_product['stock']) - seleted_quantity
+        }
+        self.edit_product(path_product , selected_product['id'] , product_properties)
+        Messagebox.show_info("سفارش شما با موفقیت قبت شد." ,"ثبت موفقیت آمیز")
+
+
+
 
 def main(products_app , customers_path):
     # create master window
